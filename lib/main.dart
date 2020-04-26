@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
             body: TabBarView(
               physics: NeverScrollableScrollPhysics(), // 터치 스크롤을 막고 하단 탭 선택으로 이동되도록 함
               children: <Widget>[
-                HomeScreen(),
+                HomeScreen(), // 홈
                 Container(
                   child: Center(
                     child: Text('search'),
