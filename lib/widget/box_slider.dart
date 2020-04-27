@@ -19,7 +19,7 @@ class BoxSlider extends StatelessWidget {
             child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: makeBoxImages(movies)),
-          )
+          ),
         ],
       ),
     );
@@ -29,16 +29,18 @@ class BoxSlider extends StatelessWidget {
 List<Widget> makeBoxImages(List<Movie> movies) {
   List<Widget> results = [];
   for (var i = 0; i < movies.length; i++) {
-    results.add(InkWell(
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.only(right: 10),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Image.asset('images/' + movies[i].poster),
+    results.add(
+      InkWell(
+        onTap: () {},
+        child: Container(
+          padding: EdgeInsets.only(right: 10),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Image.asset('images/' + movies[i].poster),
+          ),
         ),
       ),
-    ));
+    );
   }
   return results;
 }

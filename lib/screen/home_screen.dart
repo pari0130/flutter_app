@@ -5,6 +5,7 @@ import 'package:flutterapp/widget/carousel_slider.dart';
 import 'package:flutterapp/widget/circle_slider.dart';
 
 class HomeScreen extends StatefulWidget {
+  @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
