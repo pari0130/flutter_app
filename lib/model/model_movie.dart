@@ -5,7 +5,7 @@ class Movie {
   final bool like;
 
   Movie.formMap(Map<String, dynamic> map)
-      : title = map['tietle'],
+      : title = map['title'],
         keyword = map['keyword'],
         poster = map['poster'],
         like = map['like'];
