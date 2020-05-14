@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/model/model_movie.dart';
 import 'package:flutterapp/widget/box_slider.dart';
@@ -5,79 +6,48 @@ import 'package:flutterapp/widget/carousel_slider.dart';
 import 'package:flutterapp/widget/circle_slider.dart';
 
 class HomeScreen extends StatefulWidget {
-  @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Movie> movies = [
-    Movie.formMap({
-      'title': '사항의불시착1',
-      'keyword': '사랑/로맨스/판타지1',
-      'poster': 'test_movie_1.png',
-      'like': false
-    }),
-    Movie.formMap({
-      'title': '사항의불시착2',
-      'keyword': '사랑/로맨스/판타지2',
-      'poster': 'test_movie_1.png',
-      'like': false
-    }),
-    Movie.formMap({
-      'title': '사항의불시착3',
-      'keyword': '사랑/로맨스/판타지3',
-      'poster': 'test_movie_1.png',
-      'like': false
-    }),
-    Movie.formMap({
-      'title': '사항의불시착4',
-      'keyword': '사랑/로맨스/판타지4',
-      'poster': 'test_movie_1.png',
-      'like': false
-    }),
-    Movie.formMap({
-      'title': '사항의불시착5',
-      'keyword': '사랑/로맨스/판타지5',
-      'poster': 'test_movie_1.png',
-      'like': false
-    }),
-    Movie.formMap({
-      'title': '사항의불시착6',
-      'keyword': '사랑/로맨스/판타지6',
-      'poster': 'test_movie_1.png',
-      'like': false
-    }),
-    Movie.formMap({
-      'title': '사항의불시착7',
-      'keyword': '사랑/로맨스/판타지7',
-      'poster': 'test_movie_1.png',
-      'like': false
-    }),
-  ];
+  Firestore firestore = Firestore.instance;
+  Stream<QuerySnapshot> streamData;
 
   @override
   void initState() {
     super.initState();
+    streamData = firestore.collection('movie').snapshots();
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _fetchData(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('movie').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LinearProgressIndicator();
+        return _buildBody(context, snapshot.data.documents);
+      },
+    );
+  }
+
+  Widget _buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<Movie> movies = snapshot.map((d) => Movie.fromSnapshot(d)).toList();
     return ListView(
       children: <Widget>[
         Stack(
           children: <Widget>[
-            TopBar(),
             CarouselImage(movies: movies),
+            TopBar(),
           ],
         ),
-        CircleSlider(
-          movies: movies,
-        ),
-        BoxSlider(
-          movies: movies,
-        )
+        CircleSlider(movies: movies),
+        BoxSlider(movies: movies),
       ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _fetchData(context);
   }
 }
 

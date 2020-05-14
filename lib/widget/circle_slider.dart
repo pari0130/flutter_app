@@ -4,9 +4,7 @@ import 'package:flutterapp/screen/detail_screen.dart';
 
 class CircleSlider extends StatelessWidget {
   final List<Movie> movies;
-
   CircleSlider({this.movies});
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,23 +32,20 @@ List<Widget> makeCircleImages(BuildContext context, List<Movie> movies) {
     results.add(
       InkWell(
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute<Null>(
+          Navigator.of(context).push(MaterialPageRoute<Null>(
               fullscreenDialog: true,
               builder: (BuildContext context) {
                 return DetailScreen(
                   movie: movies[i],
                 );
-              },
-            ),
-          );
+              }));
         },
         child: Container(
           padding: EdgeInsets.only(right: 10),
           child: Align(
             alignment: Alignment.centerLeft,
             child: CircleAvatar(
-              backgroundImage: AssetImage('images/' + movies[i].poster),
+              backgroundImage: NetworkImage(movies[i].poster),
               radius: 48,
             ),
           ),

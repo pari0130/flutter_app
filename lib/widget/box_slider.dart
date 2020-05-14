@@ -4,9 +4,7 @@ import 'package:flutterapp/screen/detail_screen.dart';
 
 class BoxSlider extends StatelessWidget {
   final List<Movie> movies;
-
   BoxSlider({this.movies});
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,9 +16,10 @@ class BoxSlider extends StatelessWidget {
           Container(
             height: 120,
             child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: makeBoxImages(context, movies)),
-          ),
+              scrollDirection: Axis.horizontal,
+              children: makeBoxImages(context, movies),
+            ),
+          )
         ],
       ),
     );
@@ -30,29 +29,24 @@ class BoxSlider extends StatelessWidget {
 List<Widget> makeBoxImages(BuildContext context, List<Movie> movies) {
   List<Widget> results = [];
   for (var i = 0; i < movies.length; i++) {
-    results.add(
-      InkWell(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute<Null>(
-              fullscreenDialog: true,
-              builder: (BuildContext context) {
-                return DetailScreen(
-                  movie: movies[i],
-                );
-              },
-            ),
-          );
-        },
-        child: Container(
-          padding: EdgeInsets.only(right: 10),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Image.asset('images/' + movies[i].poster),
-          ),
+    results.add(InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute<Null>(
+            fullscreenDialog: true,
+            builder: (BuildContext context) {
+              return DetailScreen(
+                movie: movies[i],
+              );
+            }));
+      },
+      child: Container(
+        padding: EdgeInsets.only(right: 10),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Image.network(movies[i].poster),
         ),
       ),
-    );
+    ));
   }
   return results;
 }
