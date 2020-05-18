@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/screen/home_screen.dart';
+import 'package:flutterapp/screen/like_screen.dart';
 import 'package:flutterapp/screen/more_screen.dart';
+import 'package:flutterapp/screen/search_screen.dart';
 import 'package:flutterapp/widget/bottom_bar.dart';
 
 void main() => runApp(MyApp());
@@ -30,16 +32,8 @@ class _MyAppState extends State<MyApp> {
               // 터치 스크롤을 막고 하단 탭 선택으로 이동되도록 함
               children: <Widget>[
                 HomeScreen(), // 홈
-                Container(
-                  child: Center(
-                    child: Text('search'),
-                  ),
-                ),
-                Container(
-                  child: Center(
-                    child: Text('save'),
-                  ),
-                ),
+                SearchScreen(), // 검색
+                LikeScreen(), // 찜
                 MoreScreen(),
               ],
             ),

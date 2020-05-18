@@ -15,7 +15,7 @@ class _LikeScreenState extends State<LikeScreen> {
           .where('like', isEqualTo: true)
           .snapshots(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
+        if (!snapshot.hasData) return LinearProgressIndicator(); // 가로 로딩바 -> 동그란 로딩바는 CircularProgressIndicator
         return _buildList(context, snapshot.data.documents);
       },
     );

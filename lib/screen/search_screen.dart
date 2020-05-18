@@ -68,7 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(30),
+            padding: EdgeInsets.all(10),
           ),
           Container(
             color: Colors.black,
@@ -123,6 +123,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 focusNode.hasFocus
                     ? Expanded(
                         child: FlatButton(
+                          padding: EdgeInsets.all(10),
                           child: Text('취소'),
                           onPressed: () {
                             setState(() {
